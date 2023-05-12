@@ -1,0 +1,35 @@
+{
+  "name": "buildkarium",
+  "version": "0.0.1",
+  "description": "",
+  "author": "",
+  "license": "MIT",
+  "hompage": "https://💻nyxb.ws",
+  "repository": {
+    "type": "git",
+    "url": "git+https://example.com.git"
+  },
+  "bugs": {
+    "url": "https://github.com/example/issues"
+  },
+  "bin": {
+    "example": "/dist/example.js"
+  },
+  "main": "example.js",
+  "module": "example.js",
+  "types": "example.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/example.js",
+      "import": "./dist/example.mjs",
+      "types": "./dist/example.d.ts"
+    }
+  },
+  "scripts": {
+    "test": "echo \"Happy hacking\" && 💙"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "files": [],
+  "keywords": []
+}
