@@ -1,35 +1,76 @@
 {
   "name": "buildkarium",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "🧱 An enchanting JavaScript build ecosystem!",
+  "author": "Dennis Ollhoff <contact@nyxb.xyz",
   "license": "MIT",
   "hompage": "https://💻nyxb.ws",
   "repository": {
     "type": "git",
-    "url": "git+https://example.com.git"
+    "url": "git+https://github.com/nyxblabs/buildkarium.git"
   },
   "bugs": {
-    "url": "https://github.com/example/issues"
+    "url": "https://github.com/nyxblabs/buildkarium/issues"
   },
   "bin": {
-    "example": "/dist/example.js"
+    "buildkarium": "./dist/cli.mjs"
   },
-  "main": "example.js",
-  "module": "example.js",
-  "types": "example.d.ts",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "require": "./dist/example.js",
-      "import": "./dist/example.mjs",
-      "types": "./dist/example.d.ts"
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.mjs"
     }
   },
   "scripts": {
-    "test": "echo \"Happy hacking\" && 💙"
+    "build": "nyxr buildkarium",
+    "dev": "nyxr buildkarium test/fixture",
+    "lint": "eslint --ext .ts,.js .",
+    "lint:fix": "eslint --fix --ext .ts,.js .",
+    "prepack": "nyxr buildkarium",
+    "release": "vitest run && nyxlx changelogen@latest --release && git push --follow-tags && npm publish",
+    "stub": "nyxr buildkarium --stub",
+    "test": "nyxr lint && vitest run --coverage",
+    "buildkarium": "dynot ./src/cli"
   },
-  "dependencies": {},
-  "devDependencies": {},
-  "files": [],
+  "dependencies": {
+    "@nyxb/picocolors": "^1.0.1",
+    "@rollup/plugin-alias": "^5.0.0",
+    "@rollup/plugin-commonjs": "^24.1.0",
+    "@rollup/plugin-json": "^6.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.2",
+    "@rollup/plugin-replace": "^5.0.2",
+    "@rollup/pluginutils": "^5.0.2",
+    "consolji": "^0.1.1",
+    "nyxdefaults": "^0.0.3",
+    "esbuild": "^0.17.16",
+    "globby": "^13.1.4",
+    "mimikrook": "^0.0.3",
+    "dynot": "^0.1.8",
+    "magic-string": "^0.30.0",
+    "mimikra": "^0.0.4",
+    "esmnxuts": "^0.0.10",
+    "mri": "^1.2.0",
+    "nyxpath": "^0.0.4",
+    "pkg-def": "^0.0.7",
+    "pretty-bytes": "^6.1.0",
+    "rollup": "^3.20.2",
+    "rollup-plugin-dts": "^5.3.0",
+    "magicase": "^0.0.2",
+    "typescript": "^5.0.4",
+    "typiqus": "^0.0.3"
+  },
+  "devDependencies": {
+    "@nyxb/nyxi": "^0.0.30",
+    "@nyxb/eslint-config": "^0.0.53",
+    "@types/mri": "^1.1.1",
+    "@types/node": "^18.15.11",
+    "@vitest/coverage-c8": "^0.30.1",
+    "eslint": "^8.40.0",
+    "vitest": "^0.30.1"
+  },
+  "files": [
+    "dist"
+  ],
   "keywords": []
 }
