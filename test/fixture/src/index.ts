@@ -1,22 +1,24 @@
-import { arch } from "node:os";
-import testJSON from "./test.json";
+import { arch } from 'node:os'
+import { consolji } from 'consolji'
+import testJSON from './test.json'
 
-console.log("__filename", __filename);
-console.log("__dirname", __dirname);
-console.log("import.meta.url", import.meta.url);
+consolji.log('__filename', __filename)
+consolji.log('__dirname', __dirname)
+consolji.log('import.meta.url', import.meta.url)
 
-console.log(arch());
-console.log(require("node:os").arch());
-console.log(require.resolve("rollup"));
-console.log(testJSON);
-import("node:os").then((os) => console.log(os.arch()));
+consolji.log(arch())
+consolji.log(require('node:os').arch())
 
-// @ts-ignore
-import("./runtime/foo.ts").then(console.log);
+consolji.log(require.resolve('rollup'))
+consolji.log(testJSON)
+import('node:os').then(os => consolji.log(os.arch()))
 
-export const foo = "bar";
-export const baz = "123";
-export default "default";
+// @ts-expect-error is fine
+import('./runtime/foo.ts').then(consolji.log)
+
+export const foo = 'bar'
+export const baz = '123'
+export default 'default'
 
 // Failing test
 // export * from 'defu'
