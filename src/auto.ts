@@ -34,24 +34,24 @@ export const autoPreset = definePreset(() => {
                ctx.options.declaration = res.dts
 
             consolji.info(
-               'Automatically detected entries:',
-               color.purple(
-                  ctx.options.entries
-                     .map(e =>
-                        color.bold(
-                           e.input
-                              .replace(`${ctx.options.rootDir}/`, '')
-                              .replace(/\/$/, '/*'),
-                        ),
-                     )
-                     .join(', '),
-               ),
-               color.gray(
-                  ['esm', res.cjs && 'cjs', res.dts && 'dts']
-                     .filter(Boolean)
-                     .map(tag => `[${tag}]`)
-                     .join(' '),
-               ),
+  `${color.cyan('Automatically detected entries: ')}${
+    color.purple(
+      ctx.options.entries
+        .map(e =>
+          color.bold(
+            e.input.replace(`${ctx.options.rootDir}/`, '').replace(/\/$/, '/*'),
+          ),
+        )
+        .join(`${color.cyan(', ')}${color.purple('')}`),
+    )
+  }${color.cyan(',')} ${
+    color.gray(
+      ['esm', res.cjs && 'cjs', res.dts && 'dts']
+        .filter(Boolean)
+        .map(tag => `[${tag}]`)
+        .join(' '),
+    )
+  }`,
             )
          },
       },

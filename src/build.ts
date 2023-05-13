@@ -190,7 +190,7 @@ export async function build(
    }
 
    // Done info
-   consolji.success(color.green(`Build succeeded for ${options.name}`))
+   consolji.success(color.nicegreen(`Build succeeded for ${options.name}`))
 
    // Find all dist files and add missing entries as chunks
    const outFiles = await globby('**', { cwd: options.outDir })
@@ -216,54 +216,52 @@ export async function build(
       for (const chunk of entry.chunks || [])
          totalBytes += ctx.buildEntries.find(e => e.path === chunk)?.bytes || 0
 
-      let line
-      = `  ${color.bold(rPath(entry.path))} (${
-      [
-        totalBytes && `total size: ${color.purple(prettyBytes(totalBytes))}`,
-        entry.bytes && `chunk size: ${color.purple(prettyBytes(entry.bytes))}`,
-        entry.exports?.length
-          && `exports: ${color.gray(entry.exports.join(', '))}`,
-      ]
-        .filter(Boolean)
-        .join(', ')
-      })`
+      let line = `${color.bold(color.cyan(rPath(entry.path)))} ${color.cyan('(')}${[
+    totalBytes && `${color.cyan('total size:')} ${color.purple(prettyBytes(totalBytes))}`,
+    entry.bytes && `${color.cyan('chunk size:')} ${color.purple(prettyBytes(entry.bytes))}`,
+    entry.exports?.length
+      && `${color.cyan('exports:')} ${color.gray(entry.exports.join(', '))}`,
+  ]
+    .filter(Boolean)
+    .join(color.cyan(', '))
+  }${color.cyan(')')}`
+
       if (entry.chunks?.length) {
-         line
-        += `\n${
-         entry.chunks
-           .map((p) => {
-              const chunk
-              = ctx.buildEntries.find(e => e.path === p) || ({} as any)
-            return color.gray(
-                 `  └─ ${
-                 rPath(p)
-                 }${color.bold(chunk.bytes ? ` (${prettyBytes(chunk?.bytes)})` : '')}`,
-            )
-           })
-           .join('\n')}`
+         line += `\n${entry.chunks
+      .map((p) => {
+        const chunk = ctx.buildEntries.find(e => e.path === p) || ({} as any)
+        return color.gray(
+          `  └─ ${
+          rPath(p)
+          }${color.bold(chunk.bytes ? ` (${prettyBytes(chunk?.bytes)})` : '')}`,
+        )
+      })
+      .join('\n')}`
       }
+
       if (entry.modules?.length) {
-         line
-        += `\n${
-         entry.modules
-           .filter(m => m.id.includes('node_modules'))
-           .sort((a, b) => (b.bytes || 0) - (a.bytes || 0))
-           .map((m) => {
-              return color.gray(
-                 `  📦 ${
-                 rPath(m.id)
-                 }${color.bold(m.bytes ? ` (${prettyBytes(m.bytes)})` : '')}`,
-            )
-           })
-           .join('\n')}`
+         line += `\n${entry.modules
+      .filter(m => m.id.includes('node_modules'))
+      .sort((a, b) => (b.bytes || 0) - (a.bytes || 0))
+      .map((m) => {
+        return color.gray(
+          `📦 ${
+          rPath(m.id)
+          }${color.bold(m.bytes ? ` (${prettyBytes(m.bytes)})` : '')}`,
+        )
+      })
+      .join('\n')}`
       }
+
       consolji.log(entry.chunk ? color.gray(line) : line)
    }
+
    consolji.log(
-      'Σ Total dist size (byte size):',
-      color.purple(
-         prettyBytes(ctx.buildEntries.reduce((a, e) => a + (e.bytes || 0), 0)),
-      ),
+      `${color.cyan('📦 Total dist size (byte size):')
+    } ${
+    color.purple(
+      prettyBytes(ctx.buildEntries.reduce((a, e) => a + (e.bytes || 0), 0)),
+    )}`,
    )
 
    // Validate
@@ -273,16 +271,14 @@ export async function build(
    // Call build:done
    await ctx.hooks.callHook('build:done', ctx)
 
-   consolji.log('')
-
    if (ctx.warnings.size > 0) {
       consolji.warn(
-         `Build is done with some warnings:\n\n${
-         [...ctx.warnings].map(msg => `- ${msg}`).join('\n')}`,
+         `${color.cyan('Build is done with some warnings:')}\n\n${
+               [...ctx.warnings].map(msg => `- ${msg}`).join('\n')}`,
       )
       if (ctx.options.failOnWarn) {
          consolji.error(
-            'Exiting with code (1). You can change this behavior by setting `failOnWarn: false` .',
+            `${color.red('Exiting with code (1).')} ${color.cyan('You can change this behavior by setting')} ${color.red('`failOnWarn: false`')}.`,
          )
 
          process.exit(1)
