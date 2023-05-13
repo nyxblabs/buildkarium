@@ -3,6 +3,7 @@
     "@nyxb"
   ],
   "rules": {
+    "n/prefer-global/buffer": 0,
     "@typescript-eslint/no-unused-vars": 0
   }
 }
