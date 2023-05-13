@@ -1,0 +1,16 @@
+{
+   "extends": [
+     "@nyxb"
+   ],
+   "rules": {
+      "@next/next/no-html-link-for-pages": 0,
+      "import/no-anonymous-default-export": 0,
+      "@typescript-eslint/no-var-requires": 0,
+      "@typescript-eslint/no-require-imports": 0
+   },
+   "settings": {
+      "react": {
+         "version": "16.0"
+      }
+   }
+}
