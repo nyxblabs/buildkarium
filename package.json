@@ -23,11 +23,11 @@
     }
   },
   "scripts": {
+    "prepack": "nyxr buildkarium",
     "build": "nyxr buildkarium",
     "dev": "nyxr buildkarium test/fixture",
     "lint": "eslint --ext .ts,.js .",
     "lint:fix": "eslint --fix --ext .ts,.js .",
-    "prepack": "nyxr buildkarium",
     "release": "vitest run && nyxlx changelogen@latest --release && git push --follow-tags && npm publish",
     "stub": "nyxr buildkarium --stub",
     "test": "nyxr lint && vitest run --coverage",
