@@ -32,14 +32,14 @@ export function validateDependencies(ctx: BuildContext) {
       warn(
          ctx,
          `Potential unused dependencies found: ${
-         [...unusedDependencies].map(id => color.cyan(id)).join(', ')}`,
+         [...unusedDependencies].map(id => color.purple(id)).join(', ')}`,
       )
    }
    if (implicitDependencies.size > 0 && !ctx.options.rollup.inlineDependencies) {
       warn(
          ctx,
          `Potential implicit dependencies found: ${
-         [...implicitDependencies].map(id => color.cyan(id)).join(', ')}`,
+         [...implicitDependencies].map(id => color.purple(id)).join(', ')}`,
       )
    }
 }
@@ -75,7 +75,7 @@ export function validatePackage(
       warn(
          ctx,
       `Potential missing package.json files: ${missingOutputs
-        .map(o => color.cyan(o))
+        .map(o => color.purple(o))
         .join(', ')}`,
       )
    }

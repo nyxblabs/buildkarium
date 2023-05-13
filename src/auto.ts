@@ -35,7 +35,7 @@ export const autoPreset = definePreset(() => {
 
             consolji.info(
                'Automatically detected entries:',
-               color.cyan(
+               color.purple(
                   ctx.options.entries
                      .map(e =>
                         color.bold(

@@ -151,7 +151,7 @@ export async function build(
 
    // Start info
    consolji.info(
-      color.cyan(`${options.stub ? 'Stubbing' : 'Building'} ${pkg.name}`),
+      color.purple(`${options.stub ? 'Stubbing' : 'Building'} ${pkg.name}`),
    )
    if (process.env.DEBUG) {
       consolji.info(`${color.bold('Root dir:')} ${options.rootDir}
@@ -219,8 +219,8 @@ export async function build(
       let line
       = `  ${color.bold(rPath(entry.path))} (${
       [
-        totalBytes && `total size: ${color.cyan(prettyBytes(totalBytes))}`,
-        entry.bytes && `chunk size: ${color.cyan(prettyBytes(entry.bytes))}`,
+        totalBytes && `total size: ${color.purple(prettyBytes(totalBytes))}`,
+        entry.bytes && `chunk size: ${color.purple(prettyBytes(entry.bytes))}`,
         entry.exports?.length
           && `exports: ${color.gray(entry.exports.join(', '))}`,
       ]
@@ -261,7 +261,7 @@ export async function build(
    }
    consolji.log(
       'Σ Total dist size (byte size):',
-      color.cyan(
+      color.purple(
          prettyBytes(ctx.buildEntries.reduce((a, e) => a + (e.bytes || 0), 0)),
       ),
    )
