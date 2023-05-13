@@ -33,7 +33,7 @@ export interface RollupBuildEntry extends BaseBuildEntry {
 export interface MimikraBuildEntry extends BaseBuildEntry {
    builder: 'mimikra'
    format?: 'esm' | 'cjs'
-   ext?: 'cjs' | 'mjs' | 'js' | 'ts'
+   ext?: 'cjs' | 'mjs' | 'js' | 'ts' | 'tsx' | 'jsx'
    pattern?: string | string[]
 }
 

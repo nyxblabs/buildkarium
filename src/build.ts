@@ -23,8 +23,8 @@ export async function build(
    // Determine rootDir
    rootDir = resolve(process.cwd(), rootDir || '.')
 
-   // Read build.config and package.json
-   const buildConfig: BuildConfig = tryRequire('./build.config', rootDir) || {}
+   // Read karium.config and package.json
+   const buildConfig: BuildConfig = tryRequire('./karium.config', rootDir) || {}
    const pkg: PackageJson & Record<'buildkarium' | 'build', BuildConfig>
     = tryRequire('./package.json', rootDir)
 
