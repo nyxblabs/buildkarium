@@ -1,0 +1,8 @@
+{
+  "extends": [
+    "@nyxb"
+  ],
+  "rules": {
+    "@typescript-eslint/no-unused-vars": 0
+  }
+}
